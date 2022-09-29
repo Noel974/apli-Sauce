@@ -31,8 +31,9 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
 //Sécurise les headers
+app.use(helmet({ crossOriginResourcePolicy: { policy: "same-site" } }));
+
 app.use(express.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
 //middleware qui charge les ficihiers qui sont dans le répertoire images
 app.use('/images', express.static(path.join(__dirname, 'images')))

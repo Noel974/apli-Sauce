@@ -33,7 +33,7 @@ exports.createSauce = (req, res, next) => {
         });
         sauce.save()
         .then(() => res.status(201).json({message: 'Sauce enregistrée !'}))
-        .catch(error => res.status(500).json({message: error}))
+        .catch(error => res.status(500).json({message: 'sauce erreure'}))
     }else{
         res.status(402).send({message: 'Sauce non enregistrée !'})
 
@@ -70,6 +70,7 @@ exports.modifySauce = (req, res, next) => {
             res.status(404).json({message: 'La sauce n\'existe pas'});
         }else{
             const filename = sauce.imageUrl.split('/images/')[1];
+             //suppression de l'image en cas de modification d'image
         fs.unlink(`images/${filename}`, () => {
             Sauce.updateOne({_id: req.params.id}, {...sauceObject, _id: req.params.id})
             .then(() => res.status(200).json({message: 'Sauce modifiée !'}))
@@ -81,6 +82,8 @@ exports.modifySauce = (req, res, next) => {
     .catch(error => res.status(500).json({error}))
 
 };
+
+  
 // fonction de like et de dislike des sauces prend en compte l'identifiant de l'utilisarteur et l'identifiant de la sauce
 exports.likeSauce = (req, res, next) => {
     Sauce.findOne({_id: req.params.id})

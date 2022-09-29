@@ -100,3 +100,5 @@ Dans se fichier on retrouve tous les insformations tenu secret, pour le bon dér
 
 ### .gitignore
 Dans se fichier tous les contenu qu'on voudrait pas partager sera mit dans se fichier et lors d'un "git push" il va ignoré tous les fichiers et ou dossiers qui se trouve dans se fichier lors d'un partage de code celui-ci ne pourrais pas accéder a ces fichiers et dossiers.
+  single-sauce 
+/*<h3> {{sauce.mainPepper |  uppercase}}</h3>*/

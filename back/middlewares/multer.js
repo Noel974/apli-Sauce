@@ -1,21 +1,28 @@
+//importation du package multer
 const multer = require('multer');
 
-//configuration des format d'image qui seront reconnu
-const MIME_TYPE = {
-    'image/png': 'png',
-    'image/jpeg': 'jpg',
-    'image/jpg': 'jpg'
-}
+//type de fichier accepté
+const MIME_TYPES = {
+  'image/jpg': 'jpg',
+  'image/jpeg': 'jpg',
+  'image/png': 'png'
+};
 
+//création de l'objet de configuration de Multer
 const storage = multer.diskStorage({
-    destination: (req, file, callback) => {
-        callback(null, 'images');
-    },
-    filename: (req, file, callback) => {
-        const name = file.originalname.split(' ').join('_');
-        const extension = MIME_TYPE[file.mimetype];
-        callback(null, name + Date.now()+ '.' + extension);
-    }
+  //où eregistrer les images
+  destination: (req, file, callback) => {
+    callback(null, 'images');
+  },
+  filename: (req, file, callback) => {
+    //permet de générer un nouveau nom pour les images (évite doublon)
+    const name = file.originalname.split(' ').join('_');
+    const extension = MIME_TYPES[file.mimetype];
+    callback(null, name + Date.now() + '.' + extension);
+  }
 });
 
-module.exports = multer({storage: storage}).single('image');
+//export du Middleware
+module.exports = multer({
+  storage: storage
+}).single('image');

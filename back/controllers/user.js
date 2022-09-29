@@ -17,7 +17,7 @@ exports.signup = (req, res, next) => {
             .then(() => res.status(201).json({message: 'Utilisateur créé !'})) 
             .catch(error => res.status(400).json({message : error + " L'adresse mail a été utilisée"} )); 
     })
-    .catch(error => res.status(500).json({message:'error serveur'})) 
+    .catch(error => res.status(500).json({message: error})) 
 };
 
 // Fonction d'authentication d'un utilisateur
